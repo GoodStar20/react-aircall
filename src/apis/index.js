@@ -63,3 +63,14 @@ export const patchCallData = async (id, data) => {
     return false;
   }
 };
+
+export const resetCallData = async () => {
+  try {
+    const result = await axios.patch("/reset");
+    if (result.status === 200) {
+      return true;
+    }
+  } catch (error) {
+    return false;
+  }
+};

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiArchive } from "react-icons/fi";
 
-import { getActivities, patchCallData } from "../../apis";
+import { getActivities, patchCallData, resetCallData } from "../../apis";
 import { CallDateTitle, CallList, Loading } from "../../components";
 
 import "./styles.scss";
@@ -49,20 +49,10 @@ const Calls = ({ selectedTab }) => {
   };
 
   const handleActiveAll = async () => {
-    const allCalls = [];
-    if (Object.keys(archivedCalls).length > 0) {
-      setLoading(true);
-      for (let key in archivedCalls) {
-        let value = archivedCalls[key];
-        allCalls.push(...value);
-      }
-
-      for (let call of allCalls) {
-        await patchCallData(call.id, false);
-      }
-      await fetchActivities();
-      setLoading(false);
-    }
+    setLoading(true);
+    await resetCallData();
+    await fetchActivities();
+    setLoading(false);
   };
 
   useEffect(() => {
