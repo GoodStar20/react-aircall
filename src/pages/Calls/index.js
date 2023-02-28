@@ -77,8 +77,6 @@ const Calls = ({ selectedTab }) => {
     fetchActivities();
   }, []);
 
-  console.log(selectedCalls);
-
   const renderItems = (key, value) => {
     return (
       <>
